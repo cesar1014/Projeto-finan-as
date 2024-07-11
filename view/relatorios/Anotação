@@ -1,0 +1,9 @@
+Para conseguir rodar o SQL SERVER com os comandos que são necessários é necessário instalar o Nuget e depois baixar o " System.Data.SqlClient "
+
+ETAPAS:
+Ir em gerenciar pacotes do Nuget para a solução, lá é possível encontrar o pacote necessário que será instalado para rodar.
+
+Antes é necessário baixar o NuGet os passos são o seguinte:
+
+Abra o Visual Studio e selecione Ferramentas>NuGet Gerenciador>de Pacotes Console do Gerenciador de Pacotes para abrir o console do gerenciador de pacotes. 
+Cole o comando install no Console do Gerenciador de Pacotes e pressione Enter.
