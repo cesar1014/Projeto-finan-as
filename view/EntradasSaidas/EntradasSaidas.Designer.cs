@@ -186,6 +186,7 @@
             Controls.Add(groupBox1);
             Name = "EntradasSaidas";
             Text = "EntradasSaidas";
+            Load += EntradasSaidas_Load;
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             groupBox2.ResumeLayout(false);

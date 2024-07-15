@@ -21,5 +21,10 @@ namespace Financas.view
         {
 
         }
+
+        private void EntradasSaidas_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
