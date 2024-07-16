@@ -53,9 +53,9 @@ namespace Financas.view.relatorios
                     connection.Open();
 
                     // Query SQL para selecionar os dados da tabela Transacoes
-                    string query = "SELECT Valor, Data, c.Nome AS Categoria, Descricao " +
+                    string query = "SELECT Valor, Data, c.descricao AS Categorias, t.Descricao " +
                                    "FROM Transacoes t " +
-                                   "INNER JOIN Categoria c ON t.IdCategoria = c.Id";
+                                   "INNER JOIN Categorias c ON t.ID = c.Id";
 
                     // Cria o comando SQL e o SqlDataAdapter
                     SqlCommand command = new SqlCommand(query, connection);
@@ -73,7 +73,7 @@ namespace Financas.view.relatorios
                     // Define o tamanho das colunas individualmente
                     dataGridView1.Columns["Valor"].Width = 100; // Defina o tamanho em pixels
                     dataGridView1.Columns["Data"].Width = 120;
-                    dataGridView1.Columns["Categoria"].Width = 150;
+                    dataGridView1.Columns["Categorias"].Width = 150;
                     dataGridView1.Columns["Descricao"].Width = 400;
 
                     // Opcional: Ajusta as colunas no DataGridView
@@ -100,7 +100,7 @@ namespace Financas.view.relatorios
 
         }
 
-       
+
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -117,7 +117,7 @@ namespace Financas.view.relatorios
 
         }
 
-         private void dateTimePicker2_ValueChanged(object sender, EventArgs e)
+        private void dateTimePicker2_ValueChanged(object sender, EventArgs e)
         {
 
         }
@@ -128,7 +128,7 @@ namespace Financas.view.relatorios
             DateTime dataInicio = dateTimePicker1.Value;
             DateTime dataFim = dateTimePicker2.Value;
 
-            // Captura a categoria selecionada no ComboBox
+            // Captura a Categorias selecionada no ComboBox
             string categoriaSelecionada = comboBox1.SelectedItem?.ToString();
 
             try
@@ -139,16 +139,16 @@ namespace Financas.view.relatorios
                     // Abre a conexão
                     connection.Open();
 
-                    // Query SQL para selecionar os dados da tabela Transacoes com filtro de datas e categoria
-                    string query = "SELECT Valor, Data, c.Nome AS Categoria, Descricao " +
+                    // Query SQL para selecionar os dados da tabela Transacoes com filtro de datas e Categorias
+                    string query = "SELECT Valor, Data, c.descricao AS Categorias, t.Descricao " +
                                    "FROM Transacoes t " +
-                                   "INNER JOIN Categoria c ON t.IdCategoria = c.Id " +
+                                   "INNER JOIN Categorias c ON t.ID = c.Id " +
                                    "WHERE Data >= @DataInicio AND Data <= @DataFim ";
 
-                    // Se uma categoria foi selecionada, adicione a condição à query
+                    // Se uma Categorias foi selecionada, adicione a condição à query
                     if (!string.IsNullOrEmpty(categoriaSelecionada))
                     {
-                        query += "AND c.Nome = @Categoria ";
+                        query += "AND c.descricao = @Categorias ";
                     }
 
                     // Cria o comando SQL e o SqlDataAdapter
@@ -156,10 +156,10 @@ namespace Financas.view.relatorios
                     command.Parameters.AddWithValue("@DataInicio", dataInicio);
                     command.Parameters.AddWithValue("@DataFim", dataFim);
 
-                    // Adiciona o parâmetro de categoria apenas se uma categoria foi selecionada
+                    // Adiciona o parâmetro de Categorias apenas se uma Categorias foi selecionada
                     if (!string.IsNullOrEmpty(categoriaSelecionada))
                     {
-                        command.Parameters.AddWithValue("@Categoria", categoriaSelecionada);
+                        command.Parameters.AddWithValue("@Categorias", categoriaSelecionada);
                     }
 
                     SqlDataAdapter adapter = new SqlDataAdapter(command);
@@ -176,10 +176,10 @@ namespace Financas.view.relatorios
                     // Define o tamanho das colunas individualmente (se necessário)
                     dataGridView1.Columns["Valor"].Width = 100; // Defina o tamanho em pixels
                     dataGridView1.Columns["Data"].Width = 120;
-                    dataGridView1.Columns["Categoria"].Width = 150;
+                    dataGridView1.Columns["Categorias"].Width = 150;
                     dataGridView1.Columns["Descricao"].Width = 400;
 
-                    
+
                 }
             }
             catch (Exception ex)
@@ -218,7 +218,7 @@ namespace Financas.view.relatorios
         {
             // Você pode atualizar um label ou fazer outras operações conforme necessário
             string selectedItem = comboBox1.SelectedItem?.ToString();
-            
+
 
             // Exibir o item selecionado no label1  (ESTUDAR MÉTODO)
 
@@ -234,7 +234,7 @@ namespace Financas.view.relatorios
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                string query = "SELECT Nome FROM Categoria";
+                string query = "SELECT descricao FROM Categorias";
                 SqlCommand command = new SqlCommand(query, connection);
 
                 try
@@ -244,7 +244,7 @@ namespace Financas.view.relatorios
 
                     while (reader.Read())
                     {
-                        comboBox1.Items.Add(reader["Nome"].ToString());
+                        comboBox1.Items.Add(reader["descricao"].ToString());
                     }
                 }
                 catch (Exception ex)
@@ -258,9 +258,9 @@ namespace Financas.view.relatorios
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                string query = "SELECT * FROM Categoria WHERE Nome = @Nome";
+                string query = "SELECT * FROM Categorias WHERE descricao = @descricao";
                 SqlCommand command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@Nome", categoryName);
+                command.Parameters.AddWithValue("@descricao", categoryName);
 
                 try
                 {
@@ -269,21 +269,21 @@ namespace Financas.view.relatorios
 
                     if (reader.Read())
                     {
-                        // Exibir informações da categoria no label (ESTUDAR MÉTODO)
+                        // Exibir informações da Categorias no label (ESTUDAR MÉTODO)
 
-                        //label1.Text = $"ID: {reader["Id"]}, Nome: {reader["Nome"]}";
+                        //label1.Text = $"ID: {reader["Id"]}, descricao: {reader["descricao"]}";
                     }
                     else
                     {
 
                         //  (ESTUDAR MÉTODO)
 
-                        //label1.Text = "Categoria não encontrada.";
+                        //label1.Text = "Categorias não encontrada.";
                     }
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Erro ao pesquisar categoria: " + ex.Message);
+                    MessageBox.Show("Erro ao pesquisar Categorias: " + ex.Message);
                 }
             }
         }
@@ -306,6 +306,6 @@ namespace Financas.view.relatorios
             }
         }
 
-       
+
     }
 }
