@@ -9,7 +9,7 @@ namespace Financas.models
 {
     public class Usuario
     {
-        [Required]
+        [Key]
         public int ID { get; set; }
         [Required]
         public string usuario { get; set; }

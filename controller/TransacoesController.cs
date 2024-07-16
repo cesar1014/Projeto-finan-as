@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace Financas.controller
 {
-    internal class UsuarioController: DefaultController
+    internal class TransacoesController:DefaultController
     {
-        
     }
 }

@@ -9,9 +9,10 @@ namespace Financas.models
 {
     public class Categorias
     {
-        [Required]
+        [Key]
         public int ID { get; set; }
         [Required]
         public string descricao { get; set; }  
+        public string tipo { get; set; }
     }
 }

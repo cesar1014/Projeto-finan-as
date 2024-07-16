@@ -104,8 +104,10 @@
             // 
             textBox2.Location = new Point(76, 175);
             textBox2.Name = "textBox2";
+            textBox2.PlaceholderText = "0,00";
             textBox2.Size = new Size(120, 23);
             textBox2.TabIndex = 8;
+            textBox2.TextChanged += textBox2_TextChanged;
             // 
             // label4
             // 
@@ -138,6 +140,7 @@
             radioButton2.TabStop = true;
             radioButton2.Text = "Saídas";
             radioButton2.UseVisualStyleBackColor = true;
+            radioButton2.CheckedChanged += radioButton2_CheckedChanged;
             // 
             // radioButton1
             // 
@@ -148,6 +151,7 @@
             radioButton1.TabIndex = 0;
             radioButton1.Text = "Entradas";
             radioButton1.UseVisualStyleBackColor = true;
+            radioButton1.CheckedChanged += radioButton1_CheckedChanged;
             // 
             // textBox1
             // 
@@ -172,11 +176,12 @@
             comboBox1.FlatStyle = FlatStyle.System;
             comboBox1.ForeColor = Color.Black;
             comboBox1.FormattingEnabled = true;
-            comboBox1.Items.AddRange(new object[] { "Escolha" });
+            comboBox1.Items.AddRange(new object[] { "Escolha", "Mais um" });
             comboBox1.Location = new Point(243, 48);
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(169, 23);
             comboBox1.TabIndex = 3;
+            comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
             // 
             // EntradasSaidas
             // 
