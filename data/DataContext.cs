@@ -13,5 +13,6 @@ public class DataContext : DbContext
         optionsBuilder.UseSqlServer(@"Server=localhost;Database=Financas;Trusted_Connection=True;TrustServerCertificate=True;");
     }
     public DbSet<Categorias> Categorias { get; set; }
+    public DbSet<Usuario> Usuario { get; set; }
     
 }
