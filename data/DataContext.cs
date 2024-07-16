@@ -10,7 +10,7 @@ public class DataContext : DbContext
 {
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseSqlServer(@"Server=(localhost)\mssqllocaldb;Database=Financas;Integrated Security=True");
+        optionsBuilder.UseSqlServer(@"Server=localhost;Database=Financas;Trusted_Connection=True;TrustServerCertificate=True;");
     }
     public DbSet<Categorias> Categorias { get; set; }
     
