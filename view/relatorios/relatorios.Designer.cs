@@ -31,10 +31,6 @@
             components = new System.ComponentModel.Container();
             button1 = new Button();
             dataGridView1 = new DataGridView();
-            Valor = new DataGridViewTextBoxColumn();
-            Data = new DataGridViewTextBoxColumn();
-            Categoria = new DataGridViewTextBoxColumn();
-            Descrição = new DataGridViewTextBoxColumn();
             label1 = new Label();
             dateTimePicker1 = new DateTimePicker();
             label2 = new Label();
@@ -60,35 +56,11 @@
             // dataGridView1
             // 
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Valor, Data, Categoria, Descrição });
-            dataGridView1.Location = new Point(12, 181);
+            dataGridView1.Location = new Point(20, 169);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.Size = new Size(754, 398);
             dataGridView1.TabIndex = 2;
             dataGridView1.CellContentClick += dataGridView1_CellContentClick;
-            // 
-            // Valor
-            // 
-            Valor.FillWeight = 200F;
-            Valor.HeaderText = "Valor";
-            Valor.Name = "Valor";
-            // 
-            // Data
-            // 
-            Data.HeaderText = "Data";
-            Data.Name = "Data";
-            // 
-            // Categoria
-            // 
-            Categoria.HeaderText = "Categoria";
-            Categoria.Name = "Categoria";
-            Categoria.Width = 200;
-            // 
-            // Descrição
-            // 
-            Descrição.HeaderText = "Descrição";
-            Descrição.Name = "Descrição";
-            Descrição.Width = 400;
             // 
             // label1
             // 
@@ -202,10 +174,6 @@
 
         private Button button1;
         private DataGridView dataGridView1;
-        private DataGridViewTextBoxColumn Valor;
-        private DataGridViewTextBoxColumn Data;
-        private DataGridViewTextBoxColumn Categoria;
-        private DataGridViewTextBoxColumn Descrição;
         private Label label1;
         private DateTimePicker dateTimePicker1;
         private Label label2;

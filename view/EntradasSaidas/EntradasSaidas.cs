@@ -1,10 +1,14 @@
-﻿using Financas.models;
+﻿using Financas.controller;
+using Financas.models;
+using Financas.models.Financas.models;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -15,6 +19,8 @@ namespace Financas.view
     {
         private DataContext context;
         private List<Categorias> todasAsCategorias;
+        private TransacoesController transacoesController;
+
 
         public EntradasSaidas()
         {
@@ -25,6 +31,7 @@ namespace Financas.view
             }
 
             todasAsCategorias = context.Categorias.ToList();
+            transacoesController = new TransacoesController(context);
         }
 
         private void splitContainer1_Panel2_Paint(object sender, PaintEventArgs e)
@@ -117,11 +124,59 @@ namespace Financas.view
 
         private void button1_Click(object sender, EventArgs e)
         {
-            var data = dateTimePicker1.Value ;
-            var valor = Convert.ToDouble(textBox2.Text);
-            var descricao = textBox1.Text;
-            var categoria = (Categorias)comboBox1.SelectedItem;
 
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+
+            if (textBox2.Text == "" || textBox1.Text == "")
+            {
+                if (textBox2.Text == "")
+                    MessageBox.Show("Valor não pode ser vazio!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (textBox1.Text == "")
+                    MessageBox.Show("Adicione uma descrição!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                var data = dateTimePicker1.Value;
+                var valor = Convert.ToDouble(textBox2.Text);
+                var descricao = textBox1.Text;
+                var categoria = (Categorias)comboBox1.SelectedItem;
+
+                if (valor == 0)
+                {
+                    MessageBox.Show("Valor não pode ser zero!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                Console.WriteLine(valor);
+
+                var transcao = new Transacoes
+                {
+                    data = data,
+                    valor = ((float)valor),
+                    descricao = descricao,
+                    categoria = categoria
+                };
+
+                transacoesController.CreateTransacao(transcao);
+                MessageBox.Show("Transação lançada com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                ZeraDados();
+            }
+        }
+        void ZeraDados()
+        {
+            textBox1.Text = "";
+            textBox2.Text = "";
+            radioButton1.Checked = true;
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
 
         }
     }

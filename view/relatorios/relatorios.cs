@@ -13,8 +13,9 @@ namespace Financas.view.relatorios
 {
     public partial class relatorios : Form
     {
-
-        private string connectionString = "Server=localhost\\SQLSERVER2014ECE;Database=financas;Trusted_Connection=True;TrustServerCertificate=True";
+        
+        private string connectionString = @"Server=localhost;Database=Financas;Trusted_Connection=True;TrustServerCertificate=True;";
+        //private string connectionString = "Server=localhost\\SQLSERVER2014ECE;Database=financas;Trusted_Connection=True;TrustServerCertificate=True";
 
 
         public relatorios()
@@ -53,10 +54,7 @@ namespace Financas.view.relatorios
                     connection.Open();
 
                     // Query SQL para selecionar os dados da tabela Transacoes
-                    string query = "SELECT Valor, Data, c.descricao AS Categorias, t.Descricao " +
-                                   "FROM Transacoes t " +
-                                   "INNER JOIN Categorias c ON t.ID = c.Id";
-
+                    string query = "SELECT valor, data, descricao,CategoriaID FROM Transacoes";
                     // Cria o comando SQL e o SqlDataAdapter
                     SqlCommand command = new SqlCommand(query, connection);
                     SqlDataAdapter adapter = new SqlDataAdapter(command);
@@ -73,7 +71,7 @@ namespace Financas.view.relatorios
                     // Define o tamanho das colunas individualmente
                     dataGridView1.Columns["Valor"].Width = 100; // Defina o tamanho em pixels
                     dataGridView1.Columns["Data"].Width = 120;
-                    dataGridView1.Columns["Categorias"].Width = 150;
+                    dataGridView1.Columns["CategoriaID"].Width = 150;
                     dataGridView1.Columns["Descricao"].Width = 400;
 
                     // Opcional: Ajusta as colunas no DataGridView
@@ -140,16 +138,11 @@ namespace Financas.view.relatorios
                     connection.Open();
 
                     // Query SQL para selecionar os dados da tabela Transacoes com filtro de datas e Categorias
-                    string query = "SELECT Valor, Data, c.descricao AS Categorias, t.Descricao " +
-                                   "FROM Transacoes t " +
-                                   "INNER JOIN Categorias c ON t.ID = c.Id " +
-                                   "WHERE Data >= @DataInicio AND Data <= @DataFim ";
+                    string query = "SELECT valor, data, descricao,CategoriaID FROM Transacoes";
+
 
                     // Se uma Categorias foi selecionada, adicione a condição à query
-                    if (!string.IsNullOrEmpty(categoriaSelecionada))
-                    {
-                        query += "AND c.descricao = @Categorias ";
-                    }
+                    
 
                     // Cria o comando SQL e o SqlDataAdapter
                     SqlCommand command = new SqlCommand(query, connection);
@@ -176,7 +169,7 @@ namespace Financas.view.relatorios
                     // Define o tamanho das colunas individualmente (se necessário)
                     dataGridView1.Columns["Valor"].Width = 100; // Defina o tamanho em pixels
                     dataGridView1.Columns["Data"].Width = 120;
-                    dataGridView1.Columns["Categorias"].Width = 150;
+                    dataGridView1.Columns["CategoriaID"].Width = 150;
                     dataGridView1.Columns["Descricao"].Width = 400;
 
 
