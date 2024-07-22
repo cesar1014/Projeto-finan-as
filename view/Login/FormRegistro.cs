@@ -156,9 +156,9 @@ namespace LoginApp
             label2 = new Label();
             label3 = new Label();
             SuspendLayout();
-            // 
+            
             // txtNome
-            // 
+            
             txtNome.Font = new Font("Segoe UI", 10F);
             txtNome.Location = new Point(60, 170);
             txtNome.Name = "txtNome";
@@ -166,9 +166,9 @@ namespace LoginApp
             txtNome.TabIndex = 0;
             txtNome.Enter += RemoverTextoPlaceholder;
             txtNome.Leave += DefinirTextoPlaceholder;
-            // 
+            
             // txtSenha
-            // 
+            
             txtSenha.Font = new Font("Segoe UI", 10F);
             txtSenha.Location = new Point(60, 220);
             txtSenha.Name = "txtSenha";
@@ -176,9 +176,9 @@ namespace LoginApp
             txtSenha.TabIndex = 1;
             txtSenha.Enter += RemoverTextoPlaceholder;
             txtSenha.Leave += DefinirTextoPlaceholder;
-            // 
+            
             // txtConfirmarSenha
-            // 
+            
             txtConfirmarSenha.Font = new Font("Segoe UI", 10F);
             txtConfirmarSenha.Location = new Point(60, 270);
             txtConfirmarSenha.Name = "txtConfirmarSenha";
@@ -186,9 +186,9 @@ namespace LoginApp
             txtConfirmarSenha.TabIndex = 2;
             txtConfirmarSenha.Enter += RemoverTextoPlaceholder;
             txtConfirmarSenha.Leave += DefinirTextoPlaceholder;
-            // 
+            
             // btnRegister
-            // 
+            
             btnRegister.BackColor = Color.LightSkyBlue;
             btnRegister.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             btnRegister.ForeColor = Color.White;
@@ -199,9 +199,9 @@ namespace LoginApp
             btnRegister.Text = "Registrar";
             btnRegister.UseVisualStyleBackColor = false;
             btnRegister.Click += btnRegister_Click;
-            // 
+            
             // lblErro
-            // 
+            
             lblErro.AutoSize = true;
             lblErro.Font = new Font("Segoe UI", 9F);
             lblErro.ForeColor = Color.Red;
@@ -209,9 +209,9 @@ namespace LoginApp
             lblErro.Name = "lblErro";
             lblErro.Size = new Size(0, 15);
             lblErro.TabIndex = 4;
-            // 
+            
             // lblTitulo
-            // 
+            
             lblTitulo.AutoSize = true;
             lblTitulo.Font = new Font("Arial Black", 20.25F, FontStyle.Bold | FontStyle.Italic);
             lblTitulo.Location = new Point(160, 60);
@@ -219,9 +219,9 @@ namespace LoginApp
             lblTitulo.Size = new Size(174, 38);
             lblTitulo.TabIndex = 5;
             lblTitulo.Text = "REGISTRO";
-            // 
+            
             // label1
-            // 
+            
             label1.AutoSize = true;
             label1.Font = new Font("Arial", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label1.Location = new Point(60, 152);
@@ -229,9 +229,9 @@ namespace LoginApp
             label1.Size = new Size(51, 15);
             label1.TabIndex = 6;
             label1.Text = "Usuário";
-            // 
+            
             // label2
-            // 
+            
             label2.AutoSize = true;
             label2.Font = new Font("Arial", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label2.Location = new Point(60, 202);
@@ -239,9 +239,9 @@ namespace LoginApp
             label2.Size = new Size(43, 15);
             label2.TabIndex = 7;
             label2.Text = "Senha";
-            // 
-            // label3
-            // 
+            
+            //label3
+            
             label3.AutoSize = true;
             label3.Font = new Font("Arial", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label3.Location = new Point(60, 252);
@@ -249,9 +249,9 @@ namespace LoginApp
             label3.Size = new Size(103, 15);
             label3.TabIndex = 8;
             label3.Text = "Confirmar Senha";
-            // 
+            
             // FormRegister
-            // 
+            
             ClientSize = new Size(470, 420);
             Controls.Add(label3);
             Controls.Add(label2);
