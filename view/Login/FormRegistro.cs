@@ -13,6 +13,7 @@ namespace LoginApp
 
     public partial class FormRegister : Form
     {
+        // Propriedade para verificar se o registro foi bem-sucedido
         public bool RegistroBemSucedido { get; private set; } = false;
         public FormRegister()
         {
@@ -37,15 +38,16 @@ namespace LoginApp
             string senha = txtSenha.Text;
             string confirmarSenha = txtConfirmarSenha.Text;
 
-            // ValidaÁ„o da senha
+            // Valida√ß√£o da senha
             if (!IsValidPassword(senha))
             {
-                lblErro.Text = "Senha: mÌnimo de 8 caracteres, uma mai˙scula e um caractere especial.";
+                lblErro.Text = "Senha: m√≠nimo de 8 caracteres, uma mai√∫scula e um caractere especial.";
                 return;
             }
 
             if (senha == confirmarSenha)
             {
+                
                 string hashedSenha = ComputeSha256Hash(senha);
                 var usuario = new Usuario
                 {
@@ -53,14 +55,16 @@ namespace LoginApp
                     senha = senha,
                     saldo = 0
                 };
+
+                // Cria o usu√°rio no banco de dados
                 usuarioController.CreateUsuario(usuario);
                 RegistroBemSucedido = true;
-                MessageBox.Show("Usu·rio registrado com sucesso!");
+                MessageBox.Show("Usu√°rio registrado com sucesso!");
                 this.Close();
             }
             else
             {
-                lblErro.Text = "As senhas n„o coincidem!";
+                lblErro.Text = "As senhas n√£o coincidem!";
             }
         }
 
@@ -83,6 +87,7 @@ namespace LoginApp
             return hasUpperCase && hasSpecialChar;
         }
 
+        // M√©todo para fazer o hashing da senha
         private string ComputeSha256Hash(string rawData)
         {
             using (SHA256 sha256Hash = SHA256.Create())
@@ -223,7 +228,7 @@ namespace LoginApp
             label1.Name = "label1";
             label1.Size = new Size(51, 15);
             label1.TabIndex = 6;
-            label1.Text = "Usu·rio";
+            label1.Text = "Usu√°rio";
             // 
             // label2
             // 
@@ -262,6 +267,8 @@ namespace LoginApp
             ResumeLayout(false);
             PerformLayout();
         }
+
+        // Declara√ß√£o dos campos e componentes do formul√°rio
 
         private UsuarioController usuarioController;
         private DataContext context;
