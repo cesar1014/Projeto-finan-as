@@ -3,15 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 using Financas.models;
-using System;
-using System.Linq;
 using System.Security.Cryptography;
 
 namespace Financas.controller
 {
-    internal class UsuarioController : DefaultController
+    public class UsuarioController : DefaultController
     {
         private readonly DataContext _context;
 
@@ -24,7 +21,6 @@ namespace Financas.controller
         {
             try
             {
-                // Verificar se o usuário já existe
                 var existingUsuario = _context.Usuario.FirstOrDefault(u => u.usuario == usuario.usuario);
                 if (existingUsuario != null)
                 {
@@ -32,7 +28,7 @@ namespace Financas.controller
                     return;
                 }
 
-                usuario.senha = ComputeSha256Hash(usuario.senha); // Hash da senha
+                usuario.senha = ComputeSha256Hash(usuario.senha);
                 _context.Usuario.Add(usuario);
                 _context.SaveChanges();
                 Console.WriteLine("Usuário criado com sucesso.");
@@ -72,7 +68,7 @@ namespace Financas.controller
                 var usuario = _context.Usuario.FirstOrDefault(u => u.usuario == usuarioNome);
                 if (usuario != null)
                 {
-                    usuario.senha = ComputeSha256Hash(novaSenha); // Hash da nova senha
+                    usuario.senha = ComputeSha256Hash(novaSenha);
                     _context.SaveChanges();
                     Console.WriteLine("Senha do usuário atualizada com sucesso.");
                 }
