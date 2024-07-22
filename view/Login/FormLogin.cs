@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -49,6 +49,7 @@ namespace LoginApp
             }
         }
 
+        // Método para fazer o hashing da senha
         private static string ComputeSha256Hash(string rawData)
         {
             using (SHA256 sha256Hash = SHA256.Create())
@@ -104,9 +105,9 @@ namespace LoginApp
             label2 = new Label();
             label1 = new Label();
             SuspendLayout();
-            // 
+            
             // txtUsuario
-            // 
+            
             txtUsuario.Font = new Font("Segoe UI", 10F);
             txtUsuario.Location = new Point(60, 180);
             txtUsuario.Name = "txtUsuario";
@@ -114,9 +115,9 @@ namespace LoginApp
             txtUsuario.TabIndex = 0;
             txtUsuario.Enter += RemoverTextoPlaceholder;
             txtUsuario.Leave += DefinirTextoPlaceholder;
-            // 
+            
             // txtSenha
-            // 
+            
             txtSenha.Font = new Font("Segoe UI", 10F);
             txtSenha.Location = new Point(60, 230);
             txtSenha.Name = "txtSenha";
@@ -124,9 +125,9 @@ namespace LoginApp
             txtSenha.TabIndex = 1;
             txtSenha.Enter += RemoverTextoPlaceholder;
             txtSenha.Leave += DefinirTextoPlaceholder;
-            // 
+            
             // btnLogin
-            // 
+            
             btnLogin.BackColor = Color.LightSkyBlue;
             btnLogin.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             btnLogin.ForeColor = Color.White;
@@ -137,9 +138,9 @@ namespace LoginApp
             btnLogin.Text = "Login";
             btnLogin.UseVisualStyleBackColor = false;
             btnLogin.Click += btnLogin_Click;
-            // 
+            
             // lblErro
-            // 
+             
             lblErro.AutoSize = true;
             lblErro.Font = new Font("Segoe UI", 9F);
             lblErro.ForeColor = Color.Red;
@@ -147,9 +148,9 @@ namespace LoginApp
             lblErro.Name = "lblErro";
             lblErro.Size = new Size(0, 15);
             lblErro.TabIndex = 3;
-            // 
+            
             // lblTitulo
-            // 
+            
             lblTitulo.AutoSize = true;
             lblTitulo.Font = new Font("Arial Black", 20.25F, FontStyle.Bold | FontStyle.Italic);
             lblTitulo.Location = new Point(180, 80);
@@ -157,9 +158,9 @@ namespace LoginApp
             lblTitulo.Size = new Size(112, 38);
             lblTitulo.TabIndex = 4;
             lblTitulo.Text = "LOGIN";
-            // 
+            
             // label2
-            // 
+            
             label2.AutoSize = true;
             label2.Font = new Font("Arial", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label2.Location = new Point(60, 212);
@@ -167,9 +168,9 @@ namespace LoginApp
             label2.Size = new Size(43, 15);
             label2.TabIndex = 9;
             label2.Text = "Senha";
-            // 
+            
             // label1
-            // 
+            
             label1.AutoSize = true;
             label1.Font = new Font("Arial", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label1.Location = new Point(60, 162);
@@ -177,9 +178,9 @@ namespace LoginApp
             label1.Size = new Size(51, 15);
             label1.TabIndex = 8;
             label1.Text = "Usuário";
-            // 
+            
             // FormLogin
-            // 
+            
             ClientSize = new Size(470, 400);
             Controls.Add(label2);
             Controls.Add(label1);
@@ -193,6 +194,8 @@ namespace LoginApp
             ResumeLayout(false);
             PerformLayout();
         }
+
+        // Declaração dos campos e componentes do formulário
 
         private TextBox txtUsuario;
         private TextBox txtSenha;
