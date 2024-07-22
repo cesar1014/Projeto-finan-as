@@ -152,9 +152,9 @@ namespace LoginApp
             label1 = new Label();
             label2 = new Label();
             SuspendLayout();
-            // 
+            
             // txtSenhaAtual
-            // 
+            
             txtSenhaAtual.Font = new Font("Segoe UI", 10F);
             txtSenhaAtual.Location = new Point(60, 150);
             txtSenhaAtual.Name = "txtSenhaAtual";
@@ -162,9 +162,9 @@ namespace LoginApp
             txtSenhaAtual.TabIndex = 0;
             txtSenhaAtual.Enter += RemoverTextoPlaceholder;
             txtSenhaAtual.Leave += DefinirTextoPlaceholder;
-            // 
+            
             // txtNovaSenha
-            // 
+            
             txtNovaSenha.Font = new Font("Segoe UI", 10F);
             txtNovaSenha.Location = new Point(60, 200);
             txtNovaSenha.Name = "txtNovaSenha";
@@ -172,9 +172,9 @@ namespace LoginApp
             txtNovaSenha.TabIndex = 1;
             txtNovaSenha.Enter += RemoverTextoPlaceholder;
             txtNovaSenha.Leave += DefinirTextoPlaceholder;
-            // 
+            
             // txtConfirmarNovaSenha
-            // 
+            
             txtConfirmarNovaSenha.Font = new Font("Segoe UI", 10F);
             txtConfirmarNovaSenha.Location = new Point(60, 250);
             txtConfirmarNovaSenha.Name = "txtConfirmarNovaSenha";
@@ -182,9 +182,9 @@ namespace LoginApp
             txtConfirmarNovaSenha.TabIndex = 2;
             txtConfirmarNovaSenha.Enter += RemoverTextoPlaceholder;
             txtConfirmarNovaSenha.Leave += DefinirTextoPlaceholder;
-            // 
+            
             // btnAlterarSenha
-            // 
+            
             btnAlterarSenha.BackColor = Color.LightSkyBlue;
             btnAlterarSenha.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             btnAlterarSenha.ForeColor = Color.White;
@@ -195,9 +195,9 @@ namespace LoginApp
             btnAlterarSenha.Text = "Alterar Senha";
             btnAlterarSenha.UseVisualStyleBackColor = false;
             btnAlterarSenha.Click += btnAlterarSenha_Click;
-            // 
+            
             // lblErro
-            // 
+            
             lblErro.AutoSize = true;
             lblErro.Font = new Font("Segoe UI", 9F);
             lblErro.ForeColor = Color.Red;
@@ -205,9 +205,9 @@ namespace LoginApp
             lblErro.Name = "lblErro";
             lblErro.Size = new Size(0, 15);
             lblErro.TabIndex = 4;
-            // 
+            
             // lblTitulo
-            // 
+            
             lblTitulo.AutoSize = true;
             lblTitulo.Font = new Font("Arial Black", 20.25F, FontStyle.Bold | FontStyle.Italic);
             lblTitulo.Location = new Point(110, 52);
@@ -215,9 +215,9 @@ namespace LoginApp
             lblTitulo.Size = new Size(272, 38);
             lblTitulo.TabIndex = 5;
             lblTitulo.Text = "ALTERAR SENHA";
-            // 
+            
             // label3
-            // 
+            
             label3.AutoSize = true;
             label3.Font = new Font("Arial", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label3.Location = new Point(60, 232);
@@ -226,9 +226,9 @@ namespace LoginApp
             label3.TabIndex = 9;
             label3.Text = "Confirmar Nova Senha";
             label3.Click += label3_Click;
-            // 
+            
             // label1
-            // 
+            
             label1.AutoSize = true;
             label1.Font = new Font("Arial", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label1.Location = new Point(60, 182);
@@ -236,9 +236,9 @@ namespace LoginApp
             label1.Size = new Size(74, 15);
             label1.TabIndex = 10;
             label1.Text = "Nova Senha";
-            // 
+            
             // label2
-            // 
+            
             label2.AutoSize = true;
             label2.Font = new Font("Arial", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label2.Location = new Point(60, 132);
@@ -246,9 +246,9 @@ namespace LoginApp
             label2.Size = new Size(75, 15);
             label2.TabIndex = 11;
             label2.Text = "Senha Atual";
-            // 
+            
             // FormChangePassword
-            // 
+            
             ClientSize = new Size(470, 400);
             Controls.Add(label2);
             Controls.Add(label1);
