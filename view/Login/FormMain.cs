@@ -1,4 +1,4 @@
-﻿using Financas.controller;
+using Financas.controller;
 using System;
 using System.Windows.Forms;
 
@@ -8,7 +8,7 @@ namespace LoginApp
     {
         private string senha;
         private string usuario;
-        private UsuarioController usuarioController; // Adicione esta variável
+        private UsuarioController usuarioController;
 
         public FormMain(string usuario, string senha, UsuarioController usuarioController)
         {
@@ -17,6 +17,13 @@ namespace LoginApp
             this.usuario = usuario;
             this.usuarioController = usuarioController;
             lblBemVindo.Text = "Bem-vindo " + usuario;
+        }
+
+        //Botão alterar  senha
+        private void btnAlterarSenha_Click(object sender, EventArgs e)
+        {
+            FormChangePassword formChangePassword = new FormChangePassword(usuario, usuarioController);
+            formChangePassword.ShowDialog();
         }
 
         private void InitializeComponent()
@@ -53,11 +60,6 @@ namespace LoginApp
 
         private Label lblBemVindo;
         private Button btnAlterarSenha;
-
-        private void btnAlterarSenha_Click(object sender, EventArgs e)
-        {
-            FormChangePassword formChangePassword = new FormChangePassword(usuario, usuarioController);
-            formChangePassword.ShowDialog();
-        }
     }
+
 }
