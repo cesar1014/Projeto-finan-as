@@ -265,6 +265,8 @@ namespace LoginApp
             PerformLayout();
         }
 
+        // Declaração dos campos e componentes do formulário
+
         private TextBox txtSenhaAtual;
         private TextBox txtNovaSenha;
         private TextBox txtConfirmarNovaSenha;
