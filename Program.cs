@@ -3,15 +3,12 @@ using Financas.view.relatorios;
 using Financas.models;
 using Microsoft.EntityFrameworkCore;
 using LoginApp;
-using SomeOtherNamespace;  // Exemplo de mudança remota
 
 namespace Financas
 {
     internal static class Program
     {
-        /// <summary>
-        ///  The main entry point for the application.
-        /// </summary>
+
         [STAThread]
         static void Main()
         {
@@ -19,6 +16,8 @@ namespace Financas
 
             using (var context = new DataContext())
             {
+                context.Database.Migrate();
+
                 bool hasUsers = context.Usuario.Any();
                 if (hasUsers)
                 {
