@@ -3,6 +3,7 @@ using Financas.view.relatorios;
 using Financas.models;
 using Microsoft.EntityFrameworkCore;
 using LoginApp;
+using SomeOtherNamespace;  // Exemplo de mudança remota
 
 namespace Financas
 {
