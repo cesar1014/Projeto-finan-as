@@ -51,6 +51,7 @@ namespace LoginApp
                 return;
             }
 
+            // Verifica se a nova senha e a confirmação são iguais
             if (novaSenha == confirmarNovaSenha)
             {
                 string hashedSenhaAtual = ComputeSha256Hash(senhaAtual);
@@ -73,6 +74,7 @@ namespace LoginApp
             }
         }
 
+        // Método para validar a nova senha
         private bool IsValidPassword(string password)
         {
             if (password.Length < 8)
@@ -92,6 +94,7 @@ namespace LoginApp
             return hasUpperCase && hasSpecialChar;
         }
 
+        // Método para fazer o hashing da senha
         private string ComputeSha256Hash(string rawData)
         {
             using (SHA256 sha256Hash = SHA256.Create())
