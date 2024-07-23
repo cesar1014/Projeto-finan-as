@@ -39,9 +39,13 @@ namespace LoginApp
                 MessageBox.Show("Login bem-sucedido!");
 
                 // Passe o UsuarioController para o FormMain
-                FormMain formMain = new FormMain(usuario, usuarioExistente.senha, usuarioController);
-                formMain.Show();
+                PaginaPrincipal paginaPrincipal = new PaginaPrincipal(usuario, usuarioExistente.senha, usuarioController);
+                paginaPrincipal.Show();
                 this.Hide();
+
+                //FormMain formMain = new FormMain(usuario, usuarioExistente.senha, usuarioController);
+                //formMain.Show();
+                //this.Hide();
             }
             else
             {
