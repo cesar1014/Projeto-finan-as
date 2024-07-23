@@ -96,5 +96,61 @@ namespace Financas.controller
                 return builder.ToString();
             }
         }
+
+        public void AtualizaSaldo(float valor, string tipo, string operacao)
+        {
+            try
+            {
+                var usuario = _context.Usuario.FirstOrDefault();
+                if (usuario != null)
+                {
+                    if (operacao == "insert")
+                    {
+                        if (tipo == "Entrada")
+                        {
+                            usuario.saldo -= valor;//inverti
+                        }
+                        else if (tipo == "Saída")
+                        {
+                            usuario.saldo += valor;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Tipo de transação inválido.");
+                        }
+                    }
+                    else if (operacao == "delete")
+                    {
+                        if (tipo == "Entrada")
+                        {
+                            usuario.saldo += valor;//inverti
+                        }
+                        else if (tipo == "Saída")
+                        {
+                            usuario.saldo -= valor;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Tipo de transação inválido.");
+                        }
+                    }
+                    else
+                    {
+                        return;
+                    }
+                    _context.SaveChanges();
+                    Console.WriteLine("Saldo atualizado com sucesso.");
+
+                }
+                else
+                {
+                    Console.WriteLine("Usuário não encontrado.");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Erro ao atualizar saldo: {ex.Message}");
+            }
+        }
     }
 }

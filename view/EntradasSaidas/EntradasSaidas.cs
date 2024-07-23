@@ -22,6 +22,7 @@ namespace Financas.view
     {
         private DataContext context;
         private List<Categorias> todasAsCategorias;
+        private UsuarioController usuarioController;
         private TransacoesController transacoesController;
         private List<Transacoes> transacoes;
         private int? editingRowIndex = null;
@@ -37,6 +38,7 @@ namespace Financas.view
 
             todasAsCategorias = context.Categorias.ToList();
             transacoesController = new TransacoesController(context);
+            usuarioController = new UsuarioController(context);
         }
 
         private void splitContainer1_Panel2_Paint(object sender, PaintEventArgs e)
@@ -217,6 +219,7 @@ namespace Financas.view
                 };
 
                 transacoesController.CreateTransacao(transcao);
+                usuarioController.AtualizaSaldo((float)valor, categoria.tipo, "insert");
                 MessageBox.Show("Transação lançada com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 ZeraDados();
                 CarregarTransacoes(0);
@@ -389,6 +392,8 @@ namespace Financas.view
                     AlternarCampos();
                     CarregarTransacoes(0);
                     button3.Enabled = false;
+                    var categoria = (Categorias)comboBox2.SelectedItem;
+                    usuarioController.AtualizaSaldo((float)Convert.ToDouble(textBox4.Text), categoria.tipo, "delete"); 
                     ZeraDados2();
                 }
                 else
