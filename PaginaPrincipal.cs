@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -19,9 +19,17 @@ namespace Financas.view
 {
     public partial class PaginaPrincipal : Form
     {
-        private string connectionString = "Server=localhost\\SQLSERVER2014ECE;Database=financas;Trusted_Connection=True;TrustServerCertificate=True";
+        string connectionString = ("Server=LAPTOP-MPBBGBHD\\SQLEXPRESS;Database=Financas;Trusted_Connection=True;TrustServerCertificate=True;"); // PC LUCAS
+
+        // string connectionString = "Server=localhost\\SQLSERVER2014ECE;Database=financas;Trusted_Connection=True;TrustServerCertificate=True";
 
         public PaginaPrincipal(string usuario, string senha, UsuarioController usuarioController)
+        {
+            InitializeComponent();
+            CarregarDadosNoDataGridView();
+        }
+
+        public PaginaPrincipal()
         {
             InitializeComponent();
             CarregarDadosNoDataGridView();
@@ -37,7 +45,7 @@ namespace Financas.view
                     connection.Open();
 
                     // Query SQL para selecionar os dados da tabela Transacoes
-                    string query = "SELECT valor, data, descricao, CategoriaID FROM Transacoes";
+                    string query = "SELECT \r\n    t.valor, \r\n    t.data, \r\n    t.descricao, \r\n    c.descricao AS CategoriaDescricao\r\nFROM \r\n    [Financas].[dbo].[Transacoes] t\r\nJOIN \r\n    [Financas].[dbo].[Categorias] c\r\nON \r\n    t.CategoriaID = c.ID;";
 
                     // Cria o comando SQL e o SqlDataAdapter
                     SqlCommand command = new SqlCommand(query, connection);
@@ -53,10 +61,10 @@ namespace Financas.view
                     dataGridView1.DataSource = dataTable;
 
                     // Define o tamanho das colunas individualmente
-                    dataGridView1.Columns["Valor"].Width = 100; // Defina o tamanho em pixels
-                    dataGridView1.Columns["Data"].Width = 120;
-                    dataGridView1.Columns["CategoriaID"].Width = 80;
-                    dataGridView1.Columns["Descricao"].Width = 400;
+                    dataGridView1.Columns["t.valor"].Width = 100; // Defina o tamanho em pixels
+                    dataGridView1.Columns["t.data"].Width = 120;
+                    dataGridView1.Columns["c.descricao"].Width = 180;
+                    dataGridView1.Columns["t.descricao"].Width = 400;
 
 
                 }
