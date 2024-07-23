@@ -13,9 +13,9 @@ namespace Financas.view.relatorios
 {
     public partial class Relatorios : Form
     {
-        string connectionString = ("Server=LAPTOP-MPBBGBHD\\SQLEXPRESS;Database=Financas;Trusted_Connection=True;TrustServerCertificate=True;"); // PC LUCAS
+        //string connectionString = ("Server=LAPTOP-MPBBGBHD\\SQLEXPRESS;Database=Financas;Trusted_Connection=True;TrustServerCertificate=True;"); // PC LUCAS
 
-        //private string connectionString = @"Server=localhost;Database=Financas;Trusted_Connection=True;TrustServerCertificate=True;" //PC GABRIEL
+        private string connectionString = (@"Server=localhost;Database=Financas;Trusted_Connection=True;TrustServerCertificate=True;"); //PC GABRIEL
         //private string connectionString = "Server=localhost\\SQLSERVER2014ECE;Database=financas;Trusted_Connection=True;TrustServerCertificate=True"; //PC FACULDADE
 
 
@@ -152,7 +152,7 @@ namespace Financas.view.relatorios
                     string query = "SELECT t.valor, t.data, c.descricao AS categoriaDescricao, t.descricao AS transacaoDescricao " +
                                    "FROM Transacoes t " +
                                    "INNER JOIN Categorias c ON t.CategoriaID = c.Id " +
-                                   "WHERE t.data >= @DataInicio AND t.data <= @DataFim ";
+                                   "WHERE t.data > @DataInicio AND t.data < @DataFim ";
 
                     // Se uma categoria foi selecionada, adicione a condição à query
                     if (!string.IsNullOrEmpty(categoriaSelecionada))
@@ -197,7 +197,7 @@ namespace Financas.view.relatorios
                             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
                             // Ancora o DataGridView ao formulário (ou contêiner) se necessário
-                            dataGridView1.Dock = DockStyle.Fill;
+                            //dataGridView1.Dock = DockStyle.Fill;
 
                         }
                     }

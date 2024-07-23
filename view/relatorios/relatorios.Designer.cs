@@ -40,15 +40,16 @@
             comboBox1 = new ComboBox();
             notifyIcon1 = new NotifyIcon(components);
             vScrollBar1 = new VScrollBar();
+            groupBox1 = new GroupBox();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            groupBox1.SuspendLayout();
             SuspendLayout();
             // 
             // button1
             // 
-            button1.Location = new Point(744, 143);
-            button1.Margin = new Padding(3, 4, 3, 4);
+            button1.Location = new Point(546, 87);
             button1.Name = "button1";
-            button1.Size = new Size(141, 31);
+            button1.Size = new Size(123, 23);
             button1.TabIndex = 0;
             button1.Text = "Gerar relatório";
             button1.UseVisualStyleBackColor = true;
@@ -57,11 +58,10 @@
             // dataGridView1
             // 
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(23, 225);
-            dataGridView1.Margin = new Padding(3, 4, 3, 4);
+            dataGridView1.Location = new Point(20, 181);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.Size = new Size(862, 531);
+            dataGridView1.Size = new Size(754, 398);
             dataGridView1.TabIndex = 2;
             dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             // 
@@ -69,9 +69,9 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 12F);
-            label1.Location = new Point(23, 143);
+            label1.Location = new Point(54, 45);
             label1.Name = "label1";
-            label1.Size = new Size(40, 28);
+            label1.Size = new Size(32, 21);
             label1.TabIndex = 3;
             label1.Text = "De:";
             label1.Click += label1_Click;
@@ -79,10 +79,9 @@
             // dateTimePicker1
             // 
             dateTimePicker1.Format = DateTimePickerFormat.Custom;
-            dateTimePicker1.Location = new Point(66, 143);
-            dateTimePicker1.Margin = new Padding(3, 4, 3, 4);
+            dateTimePicker1.Location = new Point(92, 45);
             dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(169, 27);
+            dateTimePicker1.Size = new Size(148, 23);
             dateTimePicker1.TabIndex = 6;
             dateTimePicker1.TabStop = false;
             dateTimePicker1.ValueChanged += dateTimePicker1_ValueChanged;
@@ -91,9 +90,9 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 12F);
-            label2.Location = new Point(253, 144);
+            label2.Location = new Point(255, 46);
             label2.Name = "label2";
-            label2.Size = new Size(46, 28);
+            label2.Size = new Size(36, 21);
             label2.TabIndex = 7;
             label2.Text = "Até:";
             label2.Click += label2_Click;
@@ -101,19 +100,18 @@
             // dateTimePicker2
             // 
             dateTimePicker2.Format = DateTimePickerFormat.Custom;
-            dateTimePicker2.Location = new Point(301, 143);
-            dateTimePicker2.Margin = new Padding(3, 4, 3, 4);
+            dateTimePicker2.Location = new Point(297, 45);
             dateTimePicker2.Name = "dateTimePicker2";
-            dateTimePicker2.Size = new Size(155, 27);
+            dateTimePicker2.Size = new Size(136, 23);
             dateTimePicker2.TabIndex = 8;
             // 
             // label3
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
-            label3.Location = new Point(319, 36);
+            label3.Location = new Point(279, 27);
             label3.Name = "label3";
-            label3.Size = new Size(305, 41);
+            label3.Size = new Size(243, 32);
             label3.TabIndex = 9;
             label3.Text = "GERAR RELATÓRIOS";
             label3.Click += label3_Click;
@@ -122,9 +120,9 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 12F);
-            label4.Location = new Point(473, 143);
+            label4.Location = new Point(448, 45);
             label4.Name = "label4";
-            label4.Size = new Size(97, 28);
+            label4.Size = new Size(77, 21);
             label4.TabIndex = 10;
             label4.Text = "Categoria";
             label4.Click += label4_Click;
@@ -134,10 +132,9 @@
             comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBox1.FlatStyle = FlatStyle.Popup;
             comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(568, 143);
-            comboBox1.Margin = new Padding(3, 4, 3, 4);
+            comboBox1.Location = new Point(531, 45);
             comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(157, 28);
+            comboBox1.Size = new Size(138, 23);
             comboBox1.TabIndex = 11;
             comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged_2;
             // 
@@ -149,31 +146,42 @@
             // 
             // vScrollBar1
             // 
-            vScrollBar1.Location = new Point(886, 241);
+            vScrollBar1.Location = new Point(775, 181);
             vScrollBar1.Name = "vScrollBar1";
-            vScrollBar1.Size = new Size(16, 531);
+            vScrollBar1.Size = new Size(16, 398);
             vScrollBar1.TabIndex = 12;
             // 
-            // relatorios
+            // groupBox1
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            groupBox1.Controls.Add(button1);
+            groupBox1.Controls.Add(label1);
+            groupBox1.Controls.Add(comboBox1);
+            groupBox1.Controls.Add(dateTimePicker1);
+            groupBox1.Controls.Add(label4);
+            groupBox1.Controls.Add(label2);
+            groupBox1.Controls.Add(dateTimePicker2);
+            groupBox1.Location = new Point(20, 62);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Size = new Size(754, 116);
+            groupBox1.TabIndex = 13;
+            groupBox1.TabStop = false;
+            groupBox1.Text = "groupBox1";
+            // 
+            // Relatorios
+            // 
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(914, 788);
+            ClientSize = new Size(800, 591);
+            Controls.Add(groupBox1);
             Controls.Add(vScrollBar1);
-            Controls.Add(comboBox1);
-            Controls.Add(label4);
             Controls.Add(label3);
-            Controls.Add(dateTimePicker2);
-            Controls.Add(label2);
-            Controls.Add(dateTimePicker1);
-            Controls.Add(label1);
             Controls.Add(dataGridView1);
-            Controls.Add(button1);
-            Margin = new Padding(3, 4, 3, 4);
-            Name = "relatorios";
+            Name = "Relatorios";
             Text = "Relatórios";
             Load += relatorios_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            groupBox1.ResumeLayout(false);
+            groupBox1.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -191,5 +199,6 @@
         private ComboBox comboBox1;
         private NotifyIcon notifyIcon1;
         private VScrollBar vScrollBar1;
+        private GroupBox groupBox1;
     }
 }

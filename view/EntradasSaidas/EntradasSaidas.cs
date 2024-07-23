@@ -12,7 +12,9 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Net.Mime.MediaTypeNames;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ToolBar;
 
 namespace Financas.view
 {
@@ -22,6 +24,7 @@ namespace Financas.view
         private List<Categorias> todasAsCategorias;
         private TransacoesController transacoesController;
         private List<Transacoes> transacoes;
+        private int? editingRowIndex = null;
 
 
         public EntradasSaidas()
@@ -44,7 +47,7 @@ namespace Financas.view
         private void EntradasSaidas_Load(object sender, EventArgs e)
         {
             CarregarCategorias();
-            CarregarTransacoes();
+            CarregarTransacoes(1);
         }
 
         private void CarregarCategorias()
@@ -65,10 +68,6 @@ namespace Financas.view
                 comboBox1.DataSource = categorias; // Define o novo DataSource
 
 
-                comboBox2.DataSource = null; // Limpa o DataSource antes de atribuir
-                comboBox2.DisplayMember = "descricao";
-                comboBox2.ValueMember = "ID";
-                comboBox2.DataSource = categorias; // Define o novo DataSource
 
                 // Seleciona o primeiro item, se houver
                 if (comboBox1.Items.Count > 0)
@@ -94,13 +93,16 @@ namespace Financas.view
             public string CategoriaDescricao { get; set; }
         }
 
-        private void CarregarTransacoes()
+        private void CarregarTransacoes(int opt)
         {
 
             try
             {
                 // Limpa o DataGridView
-                dataGridView1.Rows.Clear();
+                if (opt == 1)
+                {
+                    dataGridView1.Rows.Clear();
+                }
 
                 var transacoes = context.Transacoes
                     .Select(t => new TransacoesViewModel
@@ -217,7 +219,7 @@ namespace Financas.view
                 transacoesController.CreateTransacao(transcao);
                 MessageBox.Show("Transação lançada com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 ZeraDados();
-                CarregarTransacoes();
+                CarregarTransacoes(0);
 
             }
         }
@@ -225,12 +227,21 @@ namespace Financas.view
         {
             textBox1.Text = "";
             textBox2.Text = "";
-            radioButton1.Checked = true;
+            
+        }
+
+        void ZeraDados2()
+        {
+            textBox3.Text = "";
+            textBox4.Text = "";
+            textBox5.Text = "";
+            comboBox2.SelectedIndex = 0;
+            dateTimePicker2.Value = DateTime.Now;
         }
 
         private void groupBox1_Enter(object sender, EventArgs e)
         {
-            CarregarTransacoes();
+            CarregarTransacoes(1);
 
         }
 
@@ -238,6 +249,28 @@ namespace Financas.view
         {
             if (e.RowIndex >= 0) // Verifica se a linha clicada é válida
             {
+                if (button4.Enabled == true)
+                {
+                    MessageBox.Show("Termine a edição antes de selecionar outra transação!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                    // Restaura a seleção para a linha anterior
+                    if (editingRowIndex.HasValue)
+                    {
+                        dataGridView1.ClearSelection();
+                        dataGridView1.Rows[editingRowIndex.Value].Selected = true;
+                    }
+
+                    return;
+                }
+
+                // Salva o índice da linha que está sendo editada
+                editingRowIndex = e.RowIndex;
+
+                if (button3.Enabled == false)
+                {
+                    button3.Enabled = true;
+                }
+
                 DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
 
                 // Atribui os valores das células aos campos de edição
@@ -246,9 +279,28 @@ namespace Financas.view
                 textBox5.Text = row.Cells["descricao"].Value.ToString();
                 dateTimePicker2.Value = Convert.ToDateTime(row.Cells["data"].Value);
 
-                // Encontra a categoria correspondente no ComboBox e a seleciona
                 string categoriaDescricao = row.Cells["Categoria"].Value.ToString();
-                comboBox2.SelectedIndex = comboBox2.FindStringExact(categoriaDescricao);
+
+                // Encontra a categoria correspondente na lista de todas as categorias
+                var categoria = todasAsCategorias.FirstOrDefault(c => c.descricao == categoriaDescricao);
+                if (categoria != null)
+                {
+                    // Filtra as categorias de acordo com o tipo da categoria encontrada
+                    var categoriasFiltradas = todasAsCategorias.Where(c => c.tipo == categoria.tipo).ToList();
+
+                    // Define o DataSource do ComboBox com a lista filtrada
+                    comboBox2.DataSource = null; // Limpa o DataSource antes de atribuir
+                    comboBox2.DisplayMember = "descricao";
+                    comboBox2.ValueMember = "ID";
+                    comboBox2.DataSource = categoriasFiltradas;
+
+                    // Seleciona a categoria correspondente no ComboBox
+                    comboBox2.SelectedIndex = comboBox2.FindStringExact(categoriaDescricao);
+                }
+                else
+                {
+                    MessageBox.Show("Erro, Categoria não encontrada.");
+                }
             }
 
         }
@@ -263,6 +315,7 @@ namespace Financas.view
             textBox5.Enabled = !textBox5.Enabled;
             button4.Enabled = !button4.Enabled;
             button3.Enabled = !button3.Enabled;
+            button5.Enabled = !button5.Enabled;
             comboBox2.Enabled = !comboBox2.Enabled;
             dateTimePicker2.Enabled = !dateTimePicker2.Enabled;
         }
@@ -276,6 +329,73 @@ namespace Financas.view
         private void button4_Click(object sender, EventArgs e)
         {
             AlternarCampos();
+
+            if (textBox4.Text == "" || textBox5.Text == "")
+            {
+                if (textBox4.Text == "")
+                {
+
+                    MessageBox.Show("Valor não pode ser vazio!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                if (textBox5.Text == "")
+                {
+
+                    MessageBox.Show("Adicione uma descrição!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+            }
+            else
+            {
+                var id = Convert.ToInt32(textBox3.Text);
+                var data = dateTimePicker2.Value;
+                var valor = ((float)Convert.ToDouble(textBox4.Text));
+                var descricao = textBox5.Text;
+                var categoria = (Categorias)comboBox2.SelectedItem;
+
+                if (valor == 0)
+                {
+                    MessageBox.Show("Valor não pode ser zero!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+
+                transacoesController.UpdateTransacao(id, valor, descricao, data, categoria.ID);
+                CarregarTransacoes(0);
+                button3.Enabled = false;
+                ZeraDados2();
+            }
+        }
+
+        private void textBox4_TextChanged(object sender, EventArgs e)
+        {
+            FormatacaoMoeda(ref textBox4);
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            if (textBox3.Text == "")
+            {
+                MessageBox.Show("Selecione uma transação para excluir!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                var id = Convert.ToInt32(textBox3.Text);
+                var result = MessageBox.Show("Deseja realmente excluir a transação?", "Excluir", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                if (result == DialogResult.Yes)
+                {
+                    transacoesController.DeleteTransacao(id);
+                    AlternarCampos();
+                    CarregarTransacoes(0);
+                    button3.Enabled = false;
+                    ZeraDados2();
+                }
+                else
+                {
+                    return;
+                }
+            }
         }
     }
 }

@@ -6,9 +6,9 @@ public class DataContext : DbContext
 {
      protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
  {
-     optionsBuilder.UseSqlServer("Server=LAPTOP-MPBBGBHD\\SQLEXPRESS;Database=Financas;Trusted_Connection=True;TrustServerCertificate=True;"); // PC LUCAS
+     //optionsBuilder.UseSqlServer("Server=LAPTOP-MPBBGBHD\\SQLEXPRESS;Database=Financas;Trusted_Connection=True;TrustServerCertificate=True;"); // PC LUCAS
 
-     //.UseSqlServer(@"Server=localhost;Database=Financas;Trusted_Connection=True;TrustServerCertificate=True;"); // PC GABRIEL
+        optionsBuilder.UseSqlServer(@"Server=localhost;Database=Financas;Trusted_Connection=True;TrustServerCertificate=True;"); // PC GABRIEL
      //optionsBuilder.UseSqlServer("Server=localhost\\SQLSERVER2014ECE;Database=financas;Trusted_Connection=True;TrustServerCertificate=True");// facul
  }
 

@@ -5,6 +5,7 @@ using System.Text;
 using System.Windows.Forms;
 using Financas.controller;
 using Financas.models;
+using Financas.view;
 
 namespace LoginApp
 {
