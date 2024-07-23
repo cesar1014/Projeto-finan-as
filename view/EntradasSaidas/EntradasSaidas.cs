@@ -12,6 +12,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Financas.view
 {
@@ -20,6 +21,7 @@ namespace Financas.view
         private DataContext context;
         private List<Categorias> todasAsCategorias;
         private TransacoesController transacoesController;
+        private List<Transacoes> transacoes;
 
 
         public EntradasSaidas()
@@ -42,6 +44,7 @@ namespace Financas.view
         private void EntradasSaidas_Load(object sender, EventArgs e)
         {
             CarregarCategorias();
+            CarregarTransacoes();
         }
 
         private void CarregarCategorias()
@@ -61,6 +64,12 @@ namespace Financas.view
                 comboBox1.ValueMember = "ID";
                 comboBox1.DataSource = categorias; // Define o novo DataSource
 
+
+                comboBox2.DataSource = null; // Limpa o DataSource antes de atribuir
+                comboBox2.DisplayMember = "descricao";
+                comboBox2.ValueMember = "ID";
+                comboBox2.DataSource = categorias; // Define o novo DataSource
+
                 // Seleciona o primeiro item, se houver
                 if (comboBox1.Items.Count > 0)
                 {
@@ -74,6 +83,53 @@ namespace Financas.view
             {
                 MessageBox.Show($"Erro ao carregar categorias: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        public class TransacoesViewModel
+        {
+            public int ID { get; set; }
+            public string Valor { get; set; }
+            public string Descricao { get; set; }
+            public DateTime Data { get; set; }
+            public string CategoriaDescricao { get; set; }
+        }
+
+        private void CarregarTransacoes()
+        {
+
+            try
+            {
+                // Limpa o DataGridView
+                dataGridView1.Rows.Clear();
+
+                var transacoes = context.Transacoes
+                    .Select(t => new TransacoesViewModel
+                    {
+                        ID = t.id,
+                        Valor = t.valor.ToString("F2"),
+                        Descricao = t.descricao,
+                        Data = t.data,
+                        CategoriaDescricao = t.categoria.descricao // ou qualquer propriedade que você queira exibir
+                    })
+                    .ToList();
+
+                dataGridView1.AutoGenerateColumns = false;
+
+                // Defina os nomes das colunas para corresponder às propriedades do ViewModel
+                dataGridView1.Columns["id"].DataPropertyName = "ID";
+                dataGridView1.Columns["valor"].DataPropertyName = "Valor";
+                dataGridView1.Columns["descricao"].DataPropertyName = "Descricao";
+                dataGridView1.Columns["data"].DataPropertyName = "Data";
+                dataGridView1.Columns["Categoria"].DataPropertyName = "CategoriaDescricao";
+
+                dataGridView1.DataSource = transacoes;
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Erro ao carregar transações: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
         }
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -99,7 +155,7 @@ namespace Financas.view
         }
 
 
-        public static void FormatacaoMoeda(ref TextBox textBox)
+        public static void FormatacaoMoeda(ref System.Windows.Forms.TextBox textBox)
         {
             string n = string.Empty;
             double v = 0;
@@ -161,6 +217,8 @@ namespace Financas.view
                 transacoesController.CreateTransacao(transcao);
                 MessageBox.Show("Transação lançada com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 ZeraDados();
+                CarregarTransacoes();
+
             }
         }
         void ZeraDados()
@@ -172,12 +230,52 @@ namespace Financas.view
 
         private void groupBox1_Enter(object sender, EventArgs e)
         {
+            CarregarTransacoes();
 
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (e.RowIndex >= 0) // Verifica se a linha clicada é válida
+            {
+                DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
 
+                // Atribui os valores das células aos campos de edição
+                textBox3.Text = row.Cells["id"].Value.ToString();
+                textBox4.Text = row.Cells["valor"].Value.ToString();
+                textBox5.Text = row.Cells["descricao"].Value.ToString();
+                dateTimePicker2.Value = Convert.ToDateTime(row.Cells["data"].Value);
+
+                // Encontra a categoria correspondente no ComboBox e a seleciona
+                string categoriaDescricao = row.Cells["Categoria"].Value.ToString();
+                comboBox2.SelectedIndex = comboBox2.FindStringExact(categoriaDescricao);
+            }
+
+        }
+
+        private void textBox3_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+        void AlternarCampos()
+        {
+            textBox4.Enabled = !textBox4.Enabled;
+            textBox5.Enabled = !textBox5.Enabled;
+            button4.Enabled = !button4.Enabled;
+            button3.Enabled = !button3.Enabled;
+            comboBox2.Enabled = !comboBox2.Enabled;
+            dateTimePicker2.Enabled = !dateTimePicker2.Enabled;
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            AlternarCampos();
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            AlternarCampos();
         }
     }
 }

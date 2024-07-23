@@ -25,7 +25,9 @@ namespace Financas
                 if (hasUsers)
                 {
                     // Se existirem usuários, abre o formulário de login
-                    Application.Run(new FormLogin());
+                    //Application.Run(new FormLogin());
+                    Application.Run(new EntradasSaidas());
+
                 }
                 else
                 {
