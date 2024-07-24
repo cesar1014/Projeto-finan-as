@@ -108,11 +108,11 @@ namespace Financas.controller
                     {
                         if (tipo == "Entrada")
                         {
-                            usuario.saldo += valor;//inverti
+                            usuario.saldo -= valor;//inverti
                         }
                         else if (tipo == "Saída")
                         {
-                            usuario.saldo -= valor;
+                            usuario.saldo += valor;
                         }
                         else
                         {
