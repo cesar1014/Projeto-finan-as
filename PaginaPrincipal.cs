@@ -20,15 +20,20 @@ namespace Financas.view
 {
     public partial class PaginaPrincipal : Form
     {
-        string connectionString = ("Server=LAPTOP-MPBBGBHD\\SQLEXPRESS;Database=Financas;Trusted_Connection=True;TrustServerCertificate=True;"); // PC LUCAS
+        //string connectionString = ("Server=LAPTOP-MPBBGBHD\\SQLEXPRESS;Database=Financas;Trusted_Connection=True;TrustServerCertificate=True;"); // PC LUCAS
+        //private string connectionString = @"Server=localhost;Database=Financas;Trusted_Connection=True;TrustServerCertificate=True;"; //PC GABRIEL
+         string connectionString = "Server=localhost\\SQLSERVER2014ECE;Database=financas;Trusted_Connection=True;TrustServerCertificate=True";
 
-        // string connectionString = "Server=localhost\\SQLSERVER2014ECE;Database=financas;Trusted_Connection=True;TrustServerCertificate=True";
+        private string usuario;
+        private UsuarioController usuarioController;
 
         public PaginaPrincipal(string usuario, string senha, UsuarioController usuarioController)
         {
             InitializeComponent();
             CarregarDadosNoDataGridView();
             this.Load += new System.EventHandler(this.label5_Click_1);
+            usuarioController = new UsuarioController(new DataContext());
+            usuario = usuario;
 
             dateTimePicker1.ValueChanged += new EventHandler(dateTimePicker1_ValueChanged);
             dateTimePicker1.Value = DateTime.Now; // Definindo a data atual
@@ -211,7 +216,7 @@ namespace Financas.view
 
         private void AlterarSenha_Click(object sender, EventArgs e)
         {
-            FormChangePassword trocarSenha = new FormChangePassword();
+            FormChangePassword trocarSenha = new FormChangePassword(usuario, usuarioController);
             trocarSenha.ShowDialog();
         }
 

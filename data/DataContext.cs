@@ -8,9 +8,9 @@ public class DataContext : DbContext
  {
      //optionsBuilder.UseSqlServer("Server=LAPTOP-MPBBGBHD\\SQLEXPRESS;Database=Financas;Trusted_Connection=True;TrustServerCertificate=True;"); // PC LUCAS
 
-        optionsBuilder.UseSqlServer(@"Server=localhost;Database=Financas;Trusted_Connection=True;TrustServerCertificate=True;"); // PC GABRIEL
-     //optionsBuilder.UseSqlServer("Server=localhost\\SQLSERVER2014ECE;Database=financas;Trusted_Connection=True;TrustServerCertificate=True");// facul
- }
+        //optionsBuilder.UseSqlServer(@"Server=localhost;Database=Financas;Trusted_Connection=True;TrustServerCertificate=True;"); // PC GABRIEL
+     optionsBuilder.UseSqlServer("Server=localhost\\SQLSERVER2014ECE;Database=financas;Trusted_Connection=True;TrustServerCertificate=True");// facul
+    }
 
     public DbSet<Categorias> Categorias { get; set; }
     public DbSet<Usuario> Usuario { get; set; }
